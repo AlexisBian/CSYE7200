@@ -1,5 +1,7 @@
 package edu.neu.coe.csye7200.fp
 
+import edu.neu.coe.csye7200.fp.Writable.SysOutWritable
+
 import java.io.{BufferedWriter, FileWriter, Flushable}
 
 /**
@@ -36,8 +38,8 @@ object DebugF {
          * @return x.
          */
         def !![X](x: X): X = { /* SOLUTION */
-            ???
-            /* END */
+            z.write("DebugF: " + w + ": " + x)
+           x /* END */
         }
 
         /**
@@ -49,7 +51,7 @@ object DebugF {
          * @tparam X the type of x.
          * @return x.
          */
-        def !|[X](x: X): X =  /* SOLUTION */ ??? /* END */
+        def !|[X](x: X): X = /* SOLUTION */ x/* END */
     }
 }
 
@@ -71,8 +73,8 @@ trait Writable {
      * @param w a String to be written out.
      */
     def write(w: String): Unit = {
-        /* SOLUTION */
-        /* END */
+        sink.append(w).append("\n")
+        sink.flush()
     }
 
     /**
@@ -103,9 +105,9 @@ object Writable {
      */
     implicit object SysOutWritable extends Writable {
         /* SOLUTION */
-        val sink: Sink = ???
+        val sink: Sink = System.out
 
-        def readBack: String = ???
+        def readBack: String = throw new Exception
         /* END */
 
         def close(): Unit = ()
@@ -127,10 +129,10 @@ object Writable {
             /* SOLUTION */ /* END */
         }
 
-        def readBack: String = /* SOLUTION */ ???
+        def readBack: String = /* SOLUTION */sink.toString
         /* END */
 
-        def close(): Unit = /* SOLUTION */ /* END */
+        def close(): Unit = ()/* SOLUTION */ /* END */
     }
 
     implicit object StringBuilderWritable extends Writable {
